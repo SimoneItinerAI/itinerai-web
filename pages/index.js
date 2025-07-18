@@ -39,6 +39,7 @@ export default function Home() {
           padding: '0 1rem',
           background:
             'url(https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1950&q=80) center / cover',
+          backgroundColor: '#1a1a1a',        // fallback scuro
           color: '#fff',
         }}
       >
