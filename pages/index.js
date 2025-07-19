@@ -1,3 +1,4 @@
+
 export default function Home() {
   return (
     <>
@@ -13,7 +14,6 @@ export default function Home() {
         }}
       >
         <span style={{ fontWeight: 700, fontSize: '1.2rem' }}>ItinerAI</span>
-
         <nav style={{ display: 'flex', gap: '1rem', fontSize: '.9rem' }}>
           <a href="#how" style={{ textDecoration: 'none', color: '#333' }}>
             Come funziona
@@ -39,7 +39,7 @@ export default function Home() {
           padding: '0 1rem',
           background:
             'url(https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1950&q=80) center / cover',
-          backgroundColor: '#1a1a1a',        // fallback scuro
+          backgroundColor: '#1a1a1a', // fallback scuro
           color: '#fff',
         }}
       >
@@ -78,7 +78,6 @@ export default function Home() {
         }}
       >
         <h2 style={{ fontSize: '1.8rem', marginBottom: '2rem' }}>Come funziona</h2>
-
         <div
           style={{
             display: 'grid',
@@ -129,8 +128,10 @@ export default function Home() {
           color: '#666',
         }}
       >
-        © {new Date().getFullYear()} ItinerAI · <a href="mailto:info@itinerai.travel">info@itinerai.travel</a>
+        © {new Date().getFullYear()} ItinerAI ·{' '}
+        <a href="mailto:info@itinerai.travel">info@itinerai.travel</a>
       </footer>
     </>
   );
 }
+
