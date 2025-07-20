@@ -1,8 +1,30 @@
+import Sidebar from '@/components/Sidebar'
+
+const menuItems = [
+  {
+    title: 'Le migliori esperienze degli utenti',
+    children: [
+      { label: 'Escursione in barca', href: '/esperienze/barca' },
+      { label: 'Tour in quad',       href: '/esperienze/quad'  },
+      { label: 'Passeggiata a cavallo', href: '/esperienze/cavallo' },
+    ],
+  },
+  {
+    title: 'Guida pratica',
+    children: [
+      { label: 'Video tutorial',    href: '/guida/video' },
+      { label: 'PDF di istruzioni', href: '/guida/istruzioni.pdf' },
+    ],
+  },
+]
 
 export default function Home() {
   return (
     <>
-      {/* HEADER ----------------------------------------------------------- */}
+      {/* 1) DRAWER MENU */}
+      <Sidebar items={menuItems} />
+
+      {/* 2) HEADER ----------------------------------------------------------- */}
       <header
         style={{
           padding: '1rem 2rem',
@@ -15,19 +37,13 @@ export default function Home() {
       >
         <span style={{ fontWeight: 700, fontSize: '1.2rem' }}>ItinerAI</span>
         <nav style={{ display: 'flex', gap: '1rem', fontSize: '.9rem' }}>
-          <a href="#how" style={{ textDecoration: 'none', color: '#333' }}>
-            Come funziona
-          </a>
-          <a href="#create" style={{ textDecoration: 'none', color: '#333' }}>
-            Crea itinerario
-          </a>
-          <a href="#contact" style={{ textDecoration: 'none', color: '#333' }}>
-            Contatti
-          </a>
+          <a href="#how"     style={{ textDecoration: 'none', color: '#333' }}>Come funziona</a>
+          <a href="#create"  style={{ textDecoration: 'none', color: '#333' }}>Crea itinerario</a>
+          <a href="#contact" style={{ textDecoration: 'none', color: '#333' }}>Contatti</a>
         </nav>
       </header>
 
-      {/* HERO ------------------------------------------------------------- */}
+      {/* 3) HERO ------------------------------------------------------------- */}
       <section
         style={{
           display: 'flex',
@@ -66,7 +82,7 @@ export default function Home() {
         </a>
       </section>
 
-      {/* HOW IT WORKS ----------------------------------------------------- */}
+      {/* 4) HOW IT WORKS ----------------------------------------------------- */}
       <section
         id="how"
         style={{
@@ -87,8 +103,8 @@ export default function Home() {
         >
           {[
             { step: 1, title: 'Scegli la destinazione', text: 'Inserisci la città o la regione.' },
-            { step: 2, title: 'Personalizza', text: 'Seleziona budget, durata e interessi.' },
-            { step: 3, title: 'Goditi il viaggio', text: 'Ricevi itinerario, mappe e prenotazioni.' },
+            { step: 2, title: 'Personalizza',        text: 'Seleziona budget, durata e interessi.' },
+            { step: 3, title: 'Goditi il viaggio',   text: 'Ricevi itinerario, mappe e prenotazioni.' },
           ].map((item) => (
             <div
               key={item.step}
@@ -116,7 +132,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FOOTER ----------------------------------------------------------- */}
+      {/* 5) PLACEHOLDER CREA ITINERARIO ----------------------------------------------------- */}
+      <section
+        id="create"
+        style={{
+          padding: '2rem',
+          textAlign: 'center',
+          fontFamily: 'sans-serif',
+        }}
+      >
+        <h2>Crea il tuo itinerario</h2>
+        <p>Funzionalità in arrivo…</p>
+      </section>
+
+      {/* 6) FOOTER ----------------------------------------------------------- */}
       <footer
         id="contact"
         style={{
@@ -132,6 +161,6 @@ export default function Home() {
         <a href="mailto:info@itinerai.travel">info@itinerai.travel</a>
       </footer>
     </>
-  );
+  )
 }
 
