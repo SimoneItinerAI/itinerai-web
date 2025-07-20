@@ -1,5 +1,5 @@
-import Head from 'next/head'
 import { useState } from 'react'
+import Head from 'next/head'
 
 const menuItems = [
   {
@@ -23,7 +23,6 @@ function Sidebar({ items }) {
   const [open, setOpen] = useState(false)
   return (
     <>
-      {/* ★ Bottone hamburger */}
       <button
         onClick={() => setOpen(!open)}
         aria-label="Apri menu"
@@ -35,8 +34,6 @@ function Sidebar({ items }) {
       >
         ☰
       </button>
-
-      {/* ★ Overlay */}
       <div
         onClick={() => setOpen(false)}
         style={{
@@ -48,8 +45,6 @@ function Sidebar({ items }) {
           zIndex: 1000
         }}
       />
-
-      {/* ★ Sidebar */}
       <nav
         style={{
           position: 'fixed', top: 0,
@@ -90,15 +85,34 @@ function Sidebar({ items }) {
 export default function Home() {
   return (
     <>
-      {/* ===== HEAD ===== */}
       <Head>
-        <title>ItinerAI – Il tuo viaggio pianificato in 30s</title>
-        <link rel="icon" href="/favicon.ico" />
-        <meta charSet="utf-8" />
+        <title>ItinerAI</title>
+        <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {/* favicon di default */}
+        <link rel="icon" href="/favicon.ico" />
+        {/* favicon ad alta risoluzione */}
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        {/* icona per iOS home screen */}
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
       </Head>
 
-      {/* ===== DRAWER MENU ===== */}
+      {/* ===== Drawer menu ===== */}
       <Sidebar items={menuItems} />
 
       {/* ===== HEADER ===== */}
