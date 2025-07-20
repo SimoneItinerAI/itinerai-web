@@ -1,0 +1,47 @@
+import { useState } from 'react'
+import styles from './Sidebar.module.css'
+
+export default function Sidebar({ items }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <>
+      {/* Bottone hamburger */}
+      <button
+        className={styles.hamburger}
+        onClick={() => setOpen(!open)}
+        aria-label="Apri menu"
+        aria-expanded={open}
+      >
+        ☰
+      </button>
+
+      {/* Sfumatura dietro al drawer */}
+      <div
+        className={`${styles.backdrop} ${open ? styles.show : ''}`}
+        onClick={() => setOpen(false)}
+      />
+
+      {/* Il drawer vero e proprio */}
+      <nav className={`${styles.drawer} ${open ? styles.show : ''}`}>
+        <ul>
+          {items.map((section, i) => (
+            <li key={i}>
+              <details>
+                <summary>{section.title}</summary>
+                <ul>
+                  {section.children.map((link, j) => (
+                    <li key={j}>
+                      {link.href
+                        ? <a href={link.href}>{link.label}</a>
+                        : <span>{link.label}</span>}
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </>
+  )
+}
