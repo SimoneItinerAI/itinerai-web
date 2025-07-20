@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { useState } from 'react'
 
 const menuItems = [
@@ -22,6 +23,7 @@ function Sidebar({ items }) {
   const [open, setOpen] = useState(false)
   return (
     <>
+      {/* ★ Bottone hamburger */}
       <button
         onClick={() => setOpen(!open)}
         aria-label="Apri menu"
@@ -33,6 +35,8 @@ function Sidebar({ items }) {
       >
         ☰
       </button>
+
+      {/* ★ Overlay */}
       <div
         onClick={() => setOpen(false)}
         style={{
@@ -44,6 +48,8 @@ function Sidebar({ items }) {
           zIndex: 1000
         }}
       />
+
+      {/* ★ Sidebar */}
       <nav
         style={{
           position: 'fixed', top: 0,
@@ -84,7 +90,15 @@ function Sidebar({ items }) {
 export default function Home() {
   return (
     <>
-      {/* ===== Drawer menu ===== */}
+      {/* ===== HEAD ===== */}
+      <Head>
+        <title>ItinerAI – Il tuo viaggio pianificato in 30s</title>
+        <link rel="icon" href="/favicon.ico" />
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+
+      {/* ===== DRAWER MENU ===== */}
       <Sidebar items={menuItems} />
 
       {/* ===== HEADER ===== */}
