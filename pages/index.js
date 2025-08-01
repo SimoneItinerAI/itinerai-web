@@ -1,20 +1,20 @@
-import { useState } from 'react'
 import Head from 'next/head'
+import { useState } from 'react'
 
 const menuItems = [
   {
     title: 'Le migliori esperienze degli utenti',
     children: [
-      { label: 'Escursione in barca', href: '#' },
-      { label: 'Tour in quad',       href: '#' },
-      { label: 'Passeggiata a cavallo', href: '#' },
+      { label: 'Escursione in barca', href: '/esperienze/barca' },
+      { label: 'Tour in quad',        href: '/esperienze/quad'  },
+      { label: 'Passeggiata a cavallo', href: '/esperienze/cavallo' },
     ],
   },
   {
     title: 'Guida pratica',
     children: [
-      { label: 'Video tutorial',    href: '#' },
-      { label: 'PDF di istruzioni', href: '#' },
+      { label: 'Video tutorial',    href: '/guida/video' },
+      { label: 'PDF di istruzioni', href: '/guida/istruzioni.pdf' },
     ],
   },
 ]
@@ -86,36 +86,21 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>ItinerAI</title>
+        <title>ItinerAI – Il tuo viaggio pianificato in 30s</title>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {/* favicon di default */}
+
+        {/* Favicon principale */}
         <link rel="icon" href="/favicon.ico" />
-        {/* favicon ad alta risoluzione */}
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon-16x16.png"
-        />
-        {/* icona per iOS home screen */}
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/apple-touch-icon.png"
-        />
+        {/* Favicon multi-size */}
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        {/* Touch icon iOS */}
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
       </Head>
 
-      {/* ===== Drawer menu ===== */}
       <Sidebar items={menuItems} />
 
-      {/* ===== HEADER ===== */}
       <header style={{
         padding: '1rem 2rem',
         display: 'flex',
@@ -132,7 +117,6 @@ export default function Home() {
         </nav>
       </header>
 
-      {/* ===== HERO ===== */}
       <section style={{
         display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center',
         textAlign:'center', height:'60vh', padding:'0 1rem',
@@ -143,7 +127,7 @@ export default function Home() {
           Benvenuto nella beta di ItinerAI
         </h1>
         <p style={{ fontSize:'1.1rem', marginTop:'.5rem', textShadow:'0 1px 6px #0004' }}>
-          Il tuo viaggio pianificato in 30&nbsp;secondi.
+          Il tuo viaggio pianificato in 30 secondi.
         </p>
         <a href="#create" style={{
           marginTop:'1.5rem', background:'#ff7e1b', color:'#fff',
@@ -154,7 +138,6 @@ export default function Home() {
         </a>
       </section>
 
-      {/* ===== HOW IT WORKS ===== */}
       <section id="how" style={{
         maxWidth:'900px', margin:'4rem auto', padding:'0 1rem',
         fontFamily:'sans-serif', textAlign:'center',
@@ -165,7 +148,7 @@ export default function Home() {
           gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))',
           gap:'2rem',
         }}>
-          {[
+          {[ 
             { step:1, title:'Scegli la destinazione', text:'Inserisci la città o la regione.' },
             { step:2, title:'Personalizza',        text:'Seleziona budget, durata e interessi.' },
             { step:3, title:'Goditi il viaggio',   text:'Ricevi itinerario, mappe e prenotazioni.' },
@@ -185,15 +168,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== CREATE PLACEHOLDER ===== */}
       <section id="create" style={{
         padding:'2rem', textAlign:'center', fontFamily:'sans-serif',
       }}>
         <h2>Crea il tuo itinerario</h2>
-        <p>Funzionalità in arrivo…</p>
+        <input 
+          type="text" 
+          placeholder="Inserisci destinazione…" 
+          style={{ padding:'0.5rem', width:'80%', maxWidth:'400px', marginBottom:'1rem' }}
+        />
+        {/* qui in futuro collegheremo la chiamata API */}
       </section>
 
-      {/* ===== FOOTER ===== */}
       <footer id="contact" style={{
         background:'#fafafa', padding:'1.5rem 2rem',
         textAlign:'center', fontFamily:'sans-serif',
@@ -204,4 +190,3 @@ export default function Home() {
     </>
   )
 }
-
