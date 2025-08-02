@@ -23,13 +23,35 @@ function Sidebar({ items }) {
 
   return (
     <>
+      {/* pulsante hamburger, visibile solo se il drawer è chiuso */}
+      {!open && (
+        <button
+          onClick={() => setOpen(true)}
+          aria-label="Apri menu"
+          style={{
+            position: 'fixed',
+            top: '1rem',
+            left: '1rem',
+            zIndex: 1002,
+            background: 'transparent',
+            border: 'none',
+            fontSize: '1.5rem',
+            cursor: 'pointer',
+            paddingRight: '1.5rem',
+            lineHeight: 1,
+          }}
+        >
+          ☰
+        </button>
+      )}
+
       {/* overlay scuro */}
       <div
         onClick={() => setOpen(false)}
         style={{
           position: 'fixed',
           inset: 0,
-          background: 'rgba(0,0,0,0.4)',
+          background: open ? 'rgba(0,0,0,0.4)' : 'transparent',
           opacity: open ? 1 : 0,
           pointerEvents: open ? 'auto' : 'none',
           transition: 'opacity 0.3s',
@@ -76,27 +98,6 @@ function Sidebar({ items }) {
           ))}
         </ul>
       </nav>
-
-      {/* pulsante hamburger */}
-      <button
-        onClick={() => setOpen(!open)}
-        aria-label="Apri menu"
-        style={{
-          position: 'fixed',
-          top: '1rem',
-          left: '1rem',
-          zIndex: 1002,
-          background: 'transparent',
-          border: 'none',
-          fontSize: '1.5rem',
-          cursor: 'pointer',
-          // aggiungo un po' di padding-right per separarlo dal logo
-          paddingRight: '1.5rem',
-          lineHeight: 1,
-        }}
-      >
-        ☰
-      </button>
     </>
   );
 }
@@ -112,12 +113,11 @@ export default function Home() {
         style={{
           padding: '1rem 2rem',
           display: 'flex',
-          justifyContent: 'flex-start',
           alignItems: 'center',
           borderBottom: '1px solid #eee',
           fontFamily: 'sans-serif',
-          // metto un margin-left per non far sovrapporre il logo al drawer hidden
-          marginLeft: '3rem',
+          // Spazio a sinistra per non sovrapporsi al pulsante
+          marginLeft: '3.5rem',
         }}
       >
         <span style={{ fontWeight: 700, fontSize: '1.2rem' }}>ItinerAI</span>
@@ -140,7 +140,7 @@ export default function Home() {
           padding: '0 1rem',
           background:
             'url(https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1950&q=80) center / cover',
-          backgroundColor: '#1a1a1a', // fallback scuro
+          backgroundColor: '#1a1a1a',
           color: '#fff',
         }}
       >
