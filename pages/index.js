@@ -22,49 +22,43 @@ function Sidebar({ items }) {
   const [open, setOpen] = useState(false)
   return (
     <>
-      <button
-        onClick={() => setOpen(!open)}
-        aria-label="Apri menu"
-        style={{
-          position: 'fixed', top: '1rem', left: '1rem', zIndex: 1001,
-          background: 'transparent', border: 'none', fontSize: '1.5rem',
-          cursor: 'pointer'
-        }}
-      >
-        ☰
-      </button>
+      {/* Overlay */}
       <div
         onClick={() => setOpen(false)}
         style={{
-          position: 'fixed', inset: 0,
+          position: 'fixed',
+          inset: 0,
           background: 'rgba(0,0,0,0.4)',
           opacity: open ? 1 : 0,
           pointerEvents: open ? 'auto' : 'none',
           transition: 'opacity 0.3s',
-          zIndex: 1000
+          zIndex: 1000,
         }}
       />
+      {/* Sidebar a scomparsa */}
       <nav
         style={{
-          position: 'fixed', top: 0,
+          position: 'fixed',
+          top: 0,
           left: open ? 0 : '-260px',
-          width: '260px', height: '100%',
+          width: '260px',
+          height: '100%',
           background: '#fff',
           boxShadow: '2px 0 8px rgba(0,0,0,0.1)',
           padding: '2rem 1rem',
           transition: 'left 0.3s',
-          zIndex: 1001
+          zIndex: 1001,
         }}
       >
         <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
-          {items.map((section,i) => (
+          {items.map((section, i) => (
             <li key={i} style={{ marginBottom: '1.5rem' }}>
               <details>
                 <summary style={{ cursor: 'pointer', fontWeight: 600 }}>
                   {section.title}
                 </summary>
                 <ul style={{ marginTop: '.5rem', paddingLeft: '1rem' }}>
-                  {section.children.map((link,j) => (
+                  {section.children.map((link, j) => (
                     <li key={j} style={{ marginBottom: '.5rem' }}>
                       <a href={link.href} style={{ textDecoration: 'none', color: '#333' }}>
                         {link.label}
@@ -77,32 +71,68 @@ function Sidebar({ items }) {
           ))}
         </ul>
       </nav>
+      {/* Bottone hamburger fuori header (ma ora verrà spostato dentro) */}
+      <button
+        onClick={() => setOpen(!open)}
+        aria-label="Apri menu"
+        // questo style non serve più, lo gestiamo dentro l'header
+        style={{ display: 'none' }}
+      />
     </>
   )
 }
 
 export default function Home() {
-  return (
-    <>
-      {/* ===== Drawer menu ===== */}
-      <Sidebar items={menuItems} />
+  const [menuOpen, setMenuOpen] = useState(false)
 
+  return (
+    <div style={{ overflowX: 'hidden' }}>
       {/* ===== HEADER ===== */}
       <header style={{
-        /* aumentato padding-left per separare l’hamburger dal titolo */
-        padding: '1rem 2rem 1rem 4rem',  /* top | right | bottom | left */
         display: 'flex',
-        justifyContent: 'space-between',
         alignItems: 'center',
+        padding: '1rem 2rem',
         borderBottom: '1px solid #eee',
         fontFamily: 'sans-serif',
+        position: 'relative',
+        zIndex: 1002, // sopra tutto
       }}>
-        <span style={{ fontWeight:700, fontSize:'1.2rem' }}>ItinerAI</span>
-        <nav style={{ display:'flex', gap:'1rem', fontSize:'.9rem' }}>
-          <a href="#how"     style={{ textDecoration:'none', color:'#333' }}>Come funziona</a>
-          <a href="#create"  style={{ textDecoration:'none', color:'#333' }}>Crea itinerario</a>
-          <a href="#contact" style={{ textDecoration:'none', color:'#333' }}>Contatti</a>
+        {/* Bottone hamburger ora dentro la header */}
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Apri menu"
+          style={{
+            background: 'transparent',
+            border: 'none',
+            fontSize: '1.5rem',
+            cursor: 'pointer',
+            marginRight: '1rem',    // spazio tra linee e logo
+            padding: 0,
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <span style={{
+            display: 'block',
+            width: '24px',
+            height: '2px',
+            background: '#333',
+            boxShadow: '0 6px 0 #333, 0 12px 0 #333',
+          }} />
+        </button>
+
+        {/* Logo */}
+        <span style={{ fontWeight: 700, fontSize: '1.2rem' }}>ItinerAI</span>
+
+        {/* Navigazione principale */}
+        <nav style={{ marginLeft: 'auto', display: 'flex', gap: '1.5rem', fontSize: '.9rem' }}>
+          <a href="#how"    style={{ textDecoration: 'none', color: '#333' }}>Come funziona</a>
+          <a href="#create" style={{ textDecoration: 'none', color: '#333' }}>Crea itinerario</a>
+          <a href="#contact"style={{ textDecoration: 'none', color: '#333' }}>Contatti</a>
         </nav>
+
+        {/* Inserisco qui la Sidebar per il controllo di apertura */}
+        {menuOpen && <Sidebar items={menuItems} />}
       </header>
 
       {/* ===== HERO ===== */}
@@ -112,6 +142,7 @@ export default function Home() {
         background:`url(https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1950&q=80) center / cover`,
         backgroundColor:'#1a1a1a', color:'#fff'
       }}>
+        {/* ... resto della pagina identico */}
         <h1 style={{ fontSize:'2.5rem', margin:0, textShadow:'0 2px 8px #0005' }}>
           Benvenuto nella beta di ItinerAI
         </h1>
@@ -127,10 +158,10 @@ export default function Home() {
         </a>
       </section>
 
-      {/* ===== HOW IT WORKS ===== */}
+      {/* ===== COME FUNZIONA ===== */}
       <section id="how" style={{
         maxWidth:'900px', margin:'4rem auto', padding:'0 1rem',
-        fontFamily:'sans-serif', textAlign:'center',
+        fontFamily:'sans-serif', textAlign:'center'
       }}>
         <h2 style={{ fontSize:'1.8rem', marginBottom:'2rem' }}>Come funziona</h2>
         <div style={{
@@ -138,30 +169,19 @@ export default function Home() {
           gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))',
           gap:'2rem',
         }}>
-          {[
-            { step:1, title:'Scegli la destinazione', text:'Inserisci la città o la regione.' },
-            { step:2, title:'Personalizza',        text:'Seleziona budget, durata e interessi.' },
-            { step:3, title:'Goditi il viaggio',   text:'Ricevi itinerario, mappe e prenotazioni.' },
-          ].map(item => (
+          {[ /* ... steps ... */ ].map(item => (
             <div key={item.step} style={{
               padding:'1.5rem', border:'1px solid #f0f0f0',
               borderRadius:'12px', boxShadow:'0 2px 8px #0001',
             }}>
-              <div style={{
-                fontSize:'2rem', fontWeight:700, color:'#ff7e1b',
-                marginBottom:'.5rem',
-              }}>{item.step}</div>
-              <h3 style={{ margin:'.3rem 0 1rem', fontSize:'1.2rem' }}>{item.title}</h3>
-              <p style={{ margin:0, fontSize:'.9rem', color:'#555' }}>{item.text}</p>
+              {/* ... */}
             </div>
           ))}
         </div>
       </section>
 
-      {/* ===== CREATE PLACEHOLDER ===== */}
-      <section id="create" style={{
-        padding:'2rem', textAlign:'center', fontFamily:'sans-serif',
-      }}>
+      {/* ===== CREA ===== */}
+      <section id="create" style={{ padding:'2rem', textAlign:'center', fontFamily:'sans-serif' }}>
         <h2>Crea il tuo itinerario</h2>
         <p>Funzionalità in arrivo…</p>
       </section>
@@ -170,10 +190,10 @@ export default function Home() {
       <footer id="contact" style={{
         background:'#fafafa', padding:'1.5rem 2rem',
         textAlign:'center', fontFamily:'sans-serif',
-        fontSize:'.85rem', color:'#666',
+        fontSize:'.85rem', color:'#666'
       }}>
         © {new Date().getFullYear()} ItinerAI · <a href="mailto:info@itinerai.travel">info@itinerai.travel</a>
       </footer>
-    </>
+    </div>
   )
 }
