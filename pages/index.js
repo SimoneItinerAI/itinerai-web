@@ -4,9 +4,9 @@ const menuItems = [
   {
     title: 'Le migliori esperienze degli utenti',
     children: [
-      { label: 'Escursione in barca',        href: '#' },
-      { label: 'Tour in quad',               href: '#' },
-      { label: 'Passeggiata a cavallo',      href: '#' },
+      { label: 'Escursione in barca',     href: '#' },
+      { label: 'Tour in quad',           href: '#' },
+      { label: 'Passeggiata a cavallo',  href: '#' },
     ],
   },
   {
@@ -20,27 +20,28 @@ const menuItems = [
 
 function Sidebar({ items }) {
   const [open, setOpen] = useState(false)
+
   return (
     <>
-      {/* pulsante hamburger */}
+      {/* ▶︎ Bottone per aprire/chiudere */}
       <button
         onClick={() => setOpen(!open)}
-        aria-label="Apri menu"
+        aria-label={open ? 'Chiudi menu' : 'Apri menu'}
         style={{
           position: 'fixed',
           top: '1rem',
           left: '1rem',
-          zIndex: 10002,
+          zIndex: 1003,
           background: 'transparent',
           border: 'none',
-          fontSize: '1.5rem',
+          fontSize: '1.8rem',
           cursor: 'pointer',
         }}
       >
         ☰
       </button>
 
-      {/* overlay */}
+      {/* ▶︎ Overlay scuro */}
       <div
         onClick={() => setOpen(false)}
         style={{
@@ -50,35 +51,38 @@ function Sidebar({ items }) {
           opacity: open ? 1 : 0,
           pointerEvents: open ? 'auto' : 'none',
           transition: 'opacity 0.3s',
-          zIndex: 10000,
+          zIndex: 1002,
         }}
       />
 
-      {/* drawer */}
-            <nav
+      {/* ▶︎ Drawer vero e proprio */}
+      <nav
         style={{
--         position: 'fixed',
--         top: 0,
--         left: open ? 0 : '-260px',
-+         position: 'fixed',
-+         top: 0,
-+         left: open ? 0 : '-260px',        // spostato fuori schermo
-+         visibility: open ? 'visible' : 'hidden',      // visibile solo da aperto
-+         pointerEvents: open ? 'auto' : 'none',         // non cliccabile da chiuso
-          width: '260px',
+          position: 'fixed',
+          top: 0,
+          left: open ? 0 : '-280px',
+          visibility: open ? 'visible' : 'hidden',
+          pointerEvents: open ? 'auto' : 'none',
+          width: '280px',
           height: '100%',
           background: '#fff',
-          boxShadow: '2px 0 8px rgba(0,0,0,0.1)',
-          padding: '2rem 1rem',
+          boxShadow: '2px 0 12px rgba(0,0,0,0.15)',
+          padding: '2rem 1.5rem',
           transition: 'left 0.3s, visibility 0.3s',
-          zIndex: 1002,
+          zIndex: 1003,
         }}
       >
         <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
           {items.map((section, i) => (
             <li key={i} style={{ marginBottom: '1.5rem' }}>
               <details>
-                <summary style={{ cursor: 'pointer', fontWeight: 600 }}>
+                <summary
+                  style={{
+                    cursor: 'pointer',
+                    fontWeight: 600,
+                    fontSize: '1rem',
+                  }}
+                >
                   {section.title}
                 </summary>
                 <ul style={{ marginTop: '.5rem', paddingLeft: '1rem' }}>
@@ -86,7 +90,11 @@ function Sidebar({ items }) {
                     <li key={j} style={{ marginBottom: '.5rem' }}>
                       <a
                         href={link.href}
-                        style={{ textDecoration: 'none', color: '#333' }}
+                        style={{
+                          textDecoration: 'none',
+                          color: '#333',
+                          fontSize: '.95rem',
+                        }}
                       >
                         {link.label}
                       </a>
@@ -105,37 +113,33 @@ function Sidebar({ items }) {
 export default function Home() {
   return (
     <>
-      {/* ===== Drawer menu ===== */}
+      {/* Drawer menu */}
       <Sidebar items={menuItems} />
 
-      {/* ===== HEADER ===== */}
+      {/* HEADER */}
       <header
         style={{
-          position: 'relative',
-          zIndex: 100,
           padding: '1rem 2rem',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
           borderBottom: '1px solid #eee',
           fontFamily: 'sans-serif',
+          position: 'sticky',
+          top: 0,
+          background: '#fff',
+          zIndex: 1001,
         }}
       >
         <span style={{ fontWeight: 700, fontSize: '1.2rem' }}>ItinerAI</span>
         <nav style={{ display: 'flex', gap: '1rem', fontSize: '.9rem' }}>
-          <a href="#how" style={{ textDecoration: 'none', color: '#333' }}>
-            Come funziona
-          </a>
-          <a href="#create" style={{ textDecoration: 'none', color: '#333' }}>
-            Crea itinerario
-          </a>
-          <a href="#contact" style={{ textDecoration: 'none', color: '#333' }}>
-            Contatti
-          </a>
+          <a href="#how"     style={{ textDecoration: 'none', color: '#333' }}>Come funziona</a>
+          <a href="#create"  style={{ textDecoration: 'none', color: '#333' }}>Crea itinerario</a>
+          <a href="#contact" style={{ textDecoration: 'none', color: '#333' }}>Contatti</a>
         </nav>
       </header>
 
-      {/* ===== HERO ===== */}
+      {/* HERO */}
       <section
         style={{
           display: 'flex',
@@ -151,22 +155,10 @@ export default function Home() {
           color: '#fff',
         }}
       >
-        <h1
-          style={{
-            fontSize: '2.5rem',
-            margin: 0,
-            textShadow: '0 2px 8px #0005',
-          }}
-        >
+        <h1 style={{ fontSize: '2.5rem', margin: 0, textShadow: '0 2px 8px #0005' }}>
           Benvenuto nella beta di ItinerAI
         </h1>
-        <p
-          style={{
-            fontSize: '1.1rem',
-            marginTop: '.5rem',
-            textShadow: '0 1px 6px #0004',
-          }}
-        >
+        <p style={{ fontSize: '1.1rem', marginTop: '.5rem', textShadow: '0 1px 6px #0004' }}>
           Il tuo viaggio pianificato in 30&nbsp;secondi.
         </p>
         <a
@@ -186,7 +178,7 @@ export default function Home() {
         </a>
       </section>
 
-      {/* ===== HOW IT WORKS ===== */}
+      {/* HOW IT WORKS */}
       <section
         id="how"
         style={{
@@ -197,9 +189,7 @@ export default function Home() {
           textAlign: 'center',
         }}
       >
-        <h2 style={{ fontSize: '1.8rem', marginBottom: '2rem' }}>
-          Come funziona
-        </h2>
+        <h2 style={{ fontSize: '1.8rem', marginBottom: '2rem' }}>Come funziona</h2>
         <div
           style={{
             display: 'grid',
@@ -208,21 +198,9 @@ export default function Home() {
           }}
         >
           {[
-            {
-              step: 1,
-              title: 'Scegli la destinazione',
-              text: 'Inserisci la città o la regione.',
-            },
-            {
-              step: 2,
-              title: 'Personalizza',
-              text: 'Seleziona budget, durata e interessi.',
-            },
-            {
-              step: 3,
-              title: 'Goditi il viaggio',
-              text: 'Ricevi itinerario, mappe e prenotazioni.',
-            },
+            { step: 1, title: 'Scegli la destinazione', text: 'Inserisci la città o la regione.' },
+            { step: 2, title: 'Personalizza',       text: 'Seleziona budget, durata e interessi.' },
+            { step: 3, title: 'Goditi il viaggio',  text: 'Ricevi itinerario, mappe e prenotazioni.' },
           ].map((item) => (
             <div
               key={item.step}
@@ -243,23 +221,14 @@ export default function Home() {
               >
                 {item.step}
               </div>
-              <h3
-                style={{
-                  margin: '.3rem 0 1rem',
-                  fontSize: '1.2rem',
-                }}
-              >
-                {item.title}
-              </h3>
-              <p style={{ margin: 0, fontSize: '.9rem', color: '#555' }}>
-                {item.text}
-              </p>
+              <h3 style={{ margin: '.3rem 0 1rem', fontSize: '1.2rem' }}>{item.title}</h3>
+              <p style={{ margin: 0, fontSize: '.9rem', color: '#555' }}>{item.text}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ===== CREATE PLACEHOLDER ===== */}
+      {/* CREATE PLACEHOLDER */}
       <section
         id="create"
         style={{
@@ -272,7 +241,7 @@ export default function Home() {
         <p>Funzionalità in arrivo…</p>
       </section>
 
-      {/* ===== FOOTER ===== */}
+      {/* FOOTER */}
       <footer
         id="contact"
         style={{
