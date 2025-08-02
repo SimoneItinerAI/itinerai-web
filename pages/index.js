@@ -55,18 +55,23 @@ function Sidebar({ items }) {
       />
 
       {/* drawer */}
-      <nav
+            <nav
         style={{
-          position: 'fixed',
-          top: 0,
-          left: open ? 0 : '-260px',
+-         position: 'fixed',
+-         top: 0,
+-         left: open ? 0 : '-260px',
++         position: 'fixed',
++         top: 0,
++         left: open ? 0 : '-260px',        // spostato fuori schermo
++         visibility: open ? 'visible' : 'hidden',      // visibile solo da aperto
++         pointerEvents: open ? 'auto' : 'none',         // non cliccabile da chiuso
           width: '260px',
           height: '100%',
           background: '#fff',
           boxShadow: '2px 0 8px rgba(0,0,0,0.1)',
           padding: '2rem 1rem',
-          transition: 'left 0.3s',
-          zIndex: 10001,
+          transition: 'left 0.3s, visibility 0.3s',
+          zIndex: 1002,
         }}
       >
         <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
