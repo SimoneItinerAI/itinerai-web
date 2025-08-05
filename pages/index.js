@@ -4,18 +4,18 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [introVisible, setIntroVisible] = useState(true);
 
-  // nascondi l'intro dopo 2,2 s
+  // Nascondi lo splash dopo 2,2 s
   useEffect(() => {
     const t = setTimeout(() => setIntroVisible(false), 2200);
     return () => clearTimeout(t);
   }, []);
 
   const heroBg =
-    "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2100&q=80";
+    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2100&q=80';
 
   return (
     <>
-      {/* Global styles + intro keyframes */}
+      {/* Global styles + keyframes */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
@@ -64,7 +64,7 @@ export default function Home() {
           height: 68px;
         }
         .intro-title {
-          fontSize: 2rem;
+          font-size: 2rem;
           font-weight: 700;
           color: var(--primary);
         }
@@ -201,7 +201,7 @@ export default function Home() {
       {/* Intro Splash Screen */}
       {introVisible && (
         <div className="intro">
-          {/* Inviami il tuo logo e sostituisci /logo.svg */}
+          {/* Sostituisci /logo.svg con il tuo SVG definitivo */}
           <img src="/logo.svg" alt="ItinerAI logo" className="intro-logo" />
           <span className="intro-title">ItinerAI</span>
         </div>
@@ -210,7 +210,9 @@ export default function Home() {
       {/* Navbar */}
       <header className="navbar">
         <div className="nav-container">
-          <a href="/" style={{ fontWeight: 700, fontSize: '1.25rem', color: 'var(--primary)' }}>ItinerAI</a>
+          <a href="/" style={{ fontWeight: 700, fontSize: '1.25rem', color: 'var(--primary)' }}>
+            ItinerAI
+          </a>
 
           <nav className="nav-links">
             <a href="#how">Come funziona</a>
@@ -218,7 +220,11 @@ export default function Home() {
             <a href="#contact">Contatti</a>
           </nav>
 
-          <button className="hamburger" aria-label="Apri menu" onClick={() => setMenuOpen(true)}>
+          <button
+            className="hamburger"
+            aria-label="Apri menu"
+            onClick={() => setMenuOpen(true)}
+          >
             ☰
           </button>
         </div>
@@ -235,7 +241,7 @@ export default function Home() {
               style={{
                 background: 'transparent',
                 border: 'none',
-                font-size: '1.5rem',
+                fontSize: '1.5rem',
                 position: 'absolute',
                 top: '1rem',
                 right: '1rem',
@@ -245,9 +251,15 @@ export default function Home() {
               ×
             </button>
             <nav>
-              <a href="#how" onClick={() => setMenuOpen(false)}>Come funziona</a>
-              <a href="#create" onClick={() => setMenuOpen(false)}>Crea itinerario</a>
-              <a href="#contact" onClick={() => setMenuOpen(false)}>Contatti</a>
+              <a href="#how" onClick={() => setMenuOpen(false)}>
+                Come funziona
+              </a>
+              <a href="#create" onClick={() => setMenuOpen(false)}>
+                Crea itinerario
+              </a>
+              <a href="#contact" onClick={() => setMenuOpen(false)}>
+                Contatti
+              </a>
             </nav>
           </aside>
         </>
@@ -257,4 +269,27 @@ export default function Home() {
       <section className="hero">
         <h1 className="hero-title">Benvenuto nella beta di ItinerAI</h1>
         <p className="hero-subtitle">Il tuo viaggio pianificato in 30 secondi.</p>
-        <a href="#create" className="btn-primary">Crea il tuo itinerario</
+        <a href="#create" className="btn-primary">
+          Crea il tuo itinerario
+        </a>
+      </section>
+
+      {/* Come funziona */}
+      <section id="how" className="section">
+        <h2 className="section-title">Come funziona</h2>
+        <div className="features-grid">
+          {[
+            {
+              num: 1,
+              title: 'Scegli la destinazione',
+              desc: 'Indica dove vuoi andare e quando partirai.',
+            },
+            {
+              num: 2,
+              title: 'Personalizza',
+              desc: 'Seleziona budget, interessi e stile di viaggio.',
+            },
+            {
+              num: 3,
+              title: 'Goditi il viaggio',
+              desc
