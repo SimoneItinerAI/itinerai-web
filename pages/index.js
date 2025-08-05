@@ -64,7 +64,7 @@ export default function Home() {
           height: 68px;
         }
         .intro-title {
-          font-size: 2rem;
+          fontSize: 2rem;
           font-weight: 700;
           color: var(--primary);
         }
