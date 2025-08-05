@@ -162,5 +162,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Placeholder */}
-      <section id="
+      {/* Placeholder create section */}
+      <section id="create" className="section" style={{ background: 'var(--bg-section)' }}>
+        <h2 className="section-title">Crea il tuo itinerario</h2>
+        <p style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto' }}>
+          Il nostro motore AI è in arrivo: presto potrai generare itinerari personalizzati completi di mappa e suggerimenti locali.
+        </p>
+      </section>
+
+      {/* Footer */}
+      <footer id="contact" style={{ background: '#111827', color: '#9ca3af', padding: '2rem 1.5rem', textAlign: 'center' }}>
+        <p style={{ margin: 0 }}>© {new Date().getFullYear()} ItinerAI — Tutti i diritti riservati.</p>
+      </footer>
+    </>
+  );
+}
