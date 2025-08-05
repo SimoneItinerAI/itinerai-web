@@ -55,7 +55,7 @@ export default function Home() {
           gap: 1rem;
           animation: introFade 2.2s cubic-bezier(.4,0,.2,1) forwards;
         }
-        .intro-logo { width: 68px; height: 68px; }
+        .intro-logo { width: 80px; height: 80px; }
         .intro-title { font-size: 2rem; font-weight: 700; color: var(--primary); }
 
         /* Navbar */
@@ -98,7 +98,7 @@ export default function Home() {
       {/* Splash */}
       {introVisible && (
         <div className="intro">
-          <img src="/logo.svg" alt="ItinerAI logo" className="intro-logo" />
+          <img src="/logo.png" alt="ItinerAI logo" className="intro-logo" />
           <span className="intro-title">ItinerAI</span>
         </div>
       )}
@@ -106,7 +106,10 @@ export default function Home() {
       {/* Navbar */}
       <header className="navbar">
         <div className="nav-container">
-          <a href="/" style={{ fontWeight: 700, fontSize: '1.25rem', color: 'var(--primary)' }}>ItinerAI</a>
+          <a href="/" style={{ display:'flex', alignItems:'center', gap:'0.5rem', fontWeight:700, fontSize:'1.25rem', color:'var(--primary)' }}>
+            <img src="/logo.png" alt="ItinerAI logo" style={{ width:'28px', height:'28px' }} />
+            <span>ItinerAI</span>
+          </a>
           <nav className="nav-links">
             <a href="#how">Come funziona</a>
             <a href="#create">Crea itinerario</a>
@@ -150,30 +153,4 @@ export default function Home() {
         <div className="features-grid">
           {[
             { num: 1, title: 'Scegli la destinazione', desc: 'Indica dove vuoi andare e quando partirai.' },
-            { num: 2, title: 'Personalizza', desc: 'Seleziona budget, interessi e stile di viaggio.' },
-            { num: 3, title: 'Goditi il viaggio', desc: 'Ricevi un itinerario pronto da seguire, con mappa interattiva.' },
-          ].map(f => (
-            <div key={f.num} className="feature-card">
-              <div className="feature-number">{f.num}</div>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '0.5rem' }}>{f.title}</h3>
-              <p style={{ lineHeight: 1.5 }}>{f.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Placeholder create section */}
-      <section id="create" className="section" style={{ background: 'var(--bg-section)' }}>
-        <h2 className="section-title">Crea il tuo itinerario</h2>
-        <p style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto' }}>
-          Il nostro motore AI è in arrivo: presto potrai generare itinerari personalizzati completi di mappa e suggerimenti locali.
-        </p>
-      </section>
-
-      {/* Footer */}
-      <footer id="contact" style={{ background: '#111827', color: '#9ca3af', padding: '2rem 1.5rem', textAlign: 'center' }}>
-        <p style={{ margin: 0 }}>© {new Date().getFullYear()} ItinerAI — Tutti i diritti riservati.</p>
-      </footer>
-    </>
-  );
-}
+            { num: 2, title
