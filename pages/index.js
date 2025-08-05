@@ -58,7 +58,7 @@ export default function Home() {
 
       {introVisible && (
         <div className="intro">
-          <img src={logo} alt="Logo ItinerAI" className="intro-logo" />
+          <img src={logo.src} alt="Logo ItinerAI" className="intro-logo" />
           <span className="intro-title">ItinerAI</span>
         </div>
       )}
@@ -66,7 +66,7 @@ export default function Home() {
       <header className="navbar">
         <div className="nav-container">
           <a href="/" style={{display:'flex',alignItems:'center',gap:'0.5rem',fontWeight:700,fontSize:'1.25rem',color:'var(--primary)'}}>
-            <img src={logo} alt="Logo" style={{width:'28px',height:'28px'}} />
+            <img src={logo.src} alt="Logo" style={{width:'28px',height:'28px'}} />
             <span>ItinerAI</span>
           </a>
           <nav className="nav-links">
