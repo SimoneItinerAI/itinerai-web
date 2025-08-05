@@ -1,14 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [introVisible, setIntroVisible] = useState(true);
+
+  // nascondi l'intro dopo 2,2 s
+  useEffect(() => {
+    const t = setTimeout(() => setIntroVisible(false), 2200);
+    return () => clearTimeout(t);
+  }, []);
 
   const heroBg =
     "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2100&q=80";
 
   return (
     <>
-      {/* Global styles */}
+      {/* Global styles + intro keyframes */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
@@ -31,6 +38,35 @@ export default function Home() {
         a {
           color: inherit;
           text-decoration: none;
+        }
+
+        /* ---------- Intro splash ---------- */
+        @keyframes introFade {
+          0% { opacity: 1; }
+          70% { opacity: 1; }
+          100% { opacity: 0; visibility: hidden; }
+        }
+        .intro {
+          position: fixed;
+          inset: 0;
+          z-index: 9999;
+          background: var(--bg-light);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
+          animation: introFade 2.2s cubic-bezier(.4,0,.2,1) forwards;
+        }
+        .intro.hidden { display: none; }
+        .intro-logo {
+          width: 68px;
+          height: 68px;
+        }
+        .intro-title {
+          font-size: 2rem;
+          font-weight: 700;
+          color: var(--primary);
         }
 
         /* Navbar */
@@ -63,12 +99,8 @@ export default function Home() {
           display: none;
         }
         @media (max-width: 768px) {
-          .nav-links {
-            display: none;
-          }
-          .hamburger {
-            display: block;
-          }
+          .nav-links { display: none; }
+          .hamburger { display: block; }
         }
 
         /* Mobile drawer */
@@ -89,14 +121,8 @@ export default function Home() {
           transform: translateX(-100%);
           transition: transform 0.3s ease;
         }
-        .drawer.open {
-          transform: translateX(0);
-        }
-        .drawer nav {
-          display: grid;
-          gap: 1rem;
-          margin-top: 2rem;
-        }
+        .drawer.open { transform: translateX(0); }
+        .drawer nav { display: grid; gap: 1rem; margin-top: 2rem; }
 
         /* Hero */
         .hero {
@@ -138,14 +164,10 @@ export default function Home() {
           background: var(--primary);
           transition: background 0.2s ease;
         }
-        .btn-primary:hover {
-          background: var(--primary-dark);
-        }
+        .btn-primary:hover { background: var(--primary-dark); }
 
         /* Sections */
-        .section {
-          padding: 4rem 1.5rem;
-        }
+        .section { padding: 4rem 1.5rem; }
         .section-title {
           text-align: center;
           font-size: 2rem;
@@ -176,10 +198,19 @@ export default function Home() {
         }
       `}</style>
 
+      {/* Intro Splash Screen */}
+      {introVisible && (
+        <div className="intro">
+          {/* Inviami il tuo logo e sostituisci /logo.svg */}
+          <img src="/logo.svg" alt="ItinerAI logo" className="intro-logo" />
+          <span className="intro-title">ItinerAI</span>
+        </div>
+      )}
+
       {/* Navbar */}
       <header className="navbar">
         <div className="nav-container">
-          <a href="/" style={{ fontWeight: 700, fontSize: '1.25rem' }}>ItinerAI</a>
+          <a href="/" style={{ fontWeight: 700, fontSize: '1.25rem', color: 'var(--primary)' }}>ItinerAI</a>
 
           <nav className="nav-links">
             <a href="#how">Come funziona</a>
@@ -187,11 +218,7 @@ export default function Home() {
             <a href="#contact">Contatti</a>
           </nav>
 
-          <button
-            className="hamburger"
-            aria-label="Apri menu"
-            onClick={() => setMenuOpen(true)}
-          >
+          <button className="hamburger" aria-label="Apri menu" onClick={() => setMenuOpen(true)}>
             ☰
           </button>
         </div>
@@ -208,7 +235,7 @@ export default function Home() {
               style={{
                 background: 'transparent',
                 border: 'none',
-                fontSize: '1.5rem',
+                font-size: '1.5rem',
                 position: 'absolute',
                 top: '1rem',
                 right: '1rem',
@@ -229,40 +256,5 @@ export default function Home() {
       {/* Hero */}
       <section className="hero">
         <h1 className="hero-title">Benvenuto nella beta di ItinerAI</h1>
-        <p className="hero-subtitle">Il tuo viaggio pianificato in 30&nbsp;secondi.</p>
-        <a href="#create" className="btn-primary">Crea il tuo itinerario</a>
-      </section>
-
-      {/* Come funziona */}
-      <section id="how" className="section">
-        <h2 className="section-title">Come funziona</h2>
-        <div className="features-grid">
-          {[
-            { num: 1, title: 'Scegli la destinazione', desc: 'Indica dove vuoi andare e quando partirai.' },
-            { num: 2, title: 'Personalizza', desc: 'Seleziona budget, interessi e stile di viaggio.' },
-            { num: 3, title: 'Goditi il viaggio', desc: 'Ricevi un itinerario pronto da seguire, con mappa interattiva.' },
-          ].map(f => (
-            <div key={f.num} className="feature-card">
-              <div className="feature-number">{f.num}</div>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '0.5rem' }}>{f.title}</h3>
-              <p style={{ lineHeight: 1.5 }}>{f.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Placeholder create section */}
-      <section id="create" className="section" style={{ background: 'var(--bg-section)' }}>
-        <h2 className="section-title">Crea il tuo itinerario</h2>
-        <p style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto' }}>
-          Il nostro motore AI è in arrivo: presto potrai generare itinerari personalizzati completi di mappa e suggerimenti locali.
-        </p>
-      </section>
-
-      {/* Footer */}
-      <footer style={{ background: '#111827', color: '#9ca3af', padding: '2rem 1.5rem', textAlign: 'center' }} id="contact">
-        <p style={{ margin: 0 }}>© {new Date().getFullYear()} ItinerAI — Tutti i diritti riservati.</p>
-      </footer>
-    </>
-  );
-}
+        <p className="hero-subtitle">Il tuo viaggio pianificato in 30 secondi.</p>
+        <a href="#create" className="btn-primary">Crea il tuo itinerario</
