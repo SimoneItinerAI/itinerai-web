@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import logo from '../src/assets/logo.png';
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -20,16 +21,10 @@ export default function Home() {
 
   return (
     <>
+      {/* —— Global Styles —— */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-        :root {
-          --primary: #ff7e1b;
-          --primary-dark: #e56700;
-          --text-light: #ffffff;
-          --text-dark: #111827;
-          --bg-light: #ffffff;
-          --bg-section: #f7f9fc;
-        }
+        :root{--primary:#ff7e1b;--primary-dark:#e56700;--text-light:#ffffff;--text-dark:#111827;--bg-light:#ffffff;--bg-section:#f7f9fc}
         *,*:before,*:after{box-sizing:border-box;margin:0;padding:0}
         body{font-family:'Inter',sans-serif;color:var(--text-dark);background:var(--bg-light)}
         a{text-decoration:none;color:inherit}
@@ -60,16 +55,18 @@ export default function Home() {
         .feature-number{font-size:2rem;font-weight:700;color:var(--primary);margin-bottom:.75rem}
         footer{background:#111827;color:#9ca3af;text-align:center;padding:2rem 1.5rem}
       `}</style>
+
       {introVisible && (
         <div className="intro">
-          <img src="/logo.png" alt="Logo ItinerAI" className="intro-logo" />
+          <img src={logo} alt="Logo ItinerAI" className="intro-logo" />
           <span className="intro-title">ItinerAI</span>
         </div>
       )}
+
       <header className="navbar">
         <div className="nav-container">
           <a href="/" style={{display:'flex',alignItems:'center',gap:'0.5rem',fontWeight:700,fontSize:'1.25rem',color:'var(--primary)'}}>
-            <img src="/logo.png" alt="Logo" style={{width:'28px',height:'28px'}} />
+            <img src={logo} alt="Logo" style={{width:'28px',height:'28px'}} />
             <span>ItinerAI</span>
           </a>
           <nav className="nav-links">
@@ -80,6 +77,7 @@ export default function Home() {
           <button className="hamburger" aria-label="Apri menu" onClick={() => setMenuOpen(true)}>☰</button>
         </div>
       </header>
+
       {menuOpen && (
         <>
           <div className="drawer-overlay" onClick={() => setMenuOpen(false)} />
@@ -93,11 +91,13 @@ export default function Home() {
           </aside>
         </>
       )}
+
       <section className="hero">
         <h1 className="hero-title">Benvenuto nella beta di ItinerAI</h1>
         <p className="hero-subtitle">Il tuo viaggio pianificato in 30 secondi.</p>
         <a href="#create" className="btn-primary">Crea il tuo itinerario</a>
       </section>
+
       <section id="how" className="section">
         <h2 className="section-title">Come funziona</h2>
         <div className="features-grid">
@@ -110,10 +110,12 @@ export default function Home() {
           ))}
         </div>
       </section>
+
       <section id="create" className="section" style={{background:'var(--bg-section)'}}>
         <h2 className="section-title">Crea il tuo itinerario</h2>
         <p style={{textAlign:'center',maxWidth:'600px',margin:'0 auto'}}>Il nostro motore AI è in arrivo: presto potrai generare itinerari personalizzati completi di mappa e suggerimenti locali.</p>
       </section>
+
       <footer id="contact">
         <p>© {new Date().getFullYear()} ItinerAI — Tutti i diritti riservati.</p>
       </footer>
