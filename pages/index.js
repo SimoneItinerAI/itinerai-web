@@ -106,7 +106,7 @@ export default function Home() {
 }
 
 .form-group label {
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.75rem;
   font-weight: 500;
   color: #ffffff;
 }
