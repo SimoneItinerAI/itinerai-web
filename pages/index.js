@@ -103,10 +103,9 @@ export default function Home() {
             <span>ItinerAI</span>
           </a>
           <nav className="nav-links">
-            <a href="#how">Come funziona</a>
-            <a href="#create">Crea itinerario</a>
-            <a href="#contact">Contatti</a>
-          </nav>
+  <a href="#how">Come funziona</a>
+  <a href="#contact">Contatti</a>
+</nav>
           <button className="hamburger" aria-label="Apri menu" onClick={() => setMenuOpen(true)}>☰</button>
         </div>
       </header>
@@ -117,10 +116,9 @@ export default function Home() {
           <aside className={`drawer ${menuOpen ? 'open' : ''}`}>
             <button onClick={() => setMenuOpen(false)} aria-label="Chiudi menu" style={{position:'absolute',top:'1rem',right:'1rem',background:'transparent',border:'none',fontSize:'1.5rem',cursor:'pointer'}}>×</button>
             <nav>
-              <a href="#how" onClick={() => setMenuOpen(false)}>Come funziona</a>
-              <a href="#create" onClick={() => setMenuOpen(false)}>Crea itinerario</a>
-              <a href="#contact" onClick={() => setMenuOpen(false)}>Contatti</a>
-            </nav>
+  <a href="#how" onClick={() => setMenuOpen(false)}>Come funziona</a>
+  <a href="#contact" onClick={() => setMenuOpen(false)}>Contatti</a>
+</nav>
           </aside>
         </>
       )}
