@@ -61,31 +61,74 @@ export default function Home() {
   padding: 2rem 1.5rem;
 }
 @keyframes fadeSlideDown {
-  0% { opacity: 0; transform: translateY(-20px); }
-  100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
+
+.form-section {
+  animation: fadeSlideDown 1s ease-in-out forwards;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  margin-top: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  color: #ffffff;
+}
+
 .form-container {
-  max-width: 800px;
-  margin: 0 auto;
-}
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1rem;
-}
-.form-group {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
 }
-.form-group label {
-  margin-bottom: 0.5rem;
+
+.form-container h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
   font-weight: 600;
+  color: #ffffff;
 }
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.form-group label {
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
 .form-group input {
-  padding: 0.5rem 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 0.65rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border-radius: 6px;
+  outline: none;
+  font-size: 1rem;
+  transition: border 0.2s ease, background-color 0.2s ease;
+}
+
+.form-group input::placeholder {
+  color: #ddd;
+}
+
+.form-group input:focus {
+  border-color: var(--primary);
+  background-color: rgba(255, 255, 255, 0.2);
 }
       `}</style>
 
@@ -176,38 +219,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-{showForm && (
-  <section className="form-section">
-    <div className="form-container">
-      <h3>Inizia a pianificare il tuo viaggio</h3>
-      <form>
-        <div className="form-grid">
-          <div className="form-group">
-            <label>Partenza</label>
-            <input type="text" placeholder="Es. Roma" />
-          </div>
-          <div className="form-group">
-            <label>Destinazione</label>
-            <input type="text" placeholder="Es. Parigi" />
-          </div>
-          <div className="form-group">
-            <label>Durata (giorni)</label>
-            <input type="number" min="1" placeholder="Es. 5" />
-          </div>
-          <div className="form-group">
-            <label>Data partenza</label>
-            <input type="date" />
-          </div>
-          <div className="form-group">
-            <label>Numero viaggiatori</label>
-            <input type="number" min="1" defaultValue="1" />
-          </div>
-        </div>
-        <button type="submit" className="btn-primary" style={{marginTop: '1rem'}}>Genera itinerario</button>
-      </form>
-    </div>
-  </section>
-)}
 
       <section id="create" className="section" style={{background:'var(--bg-section)'}}>
         <h2 className="section-title">Crea il tuo itinerario</h2>
