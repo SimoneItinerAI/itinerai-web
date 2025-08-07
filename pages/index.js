@@ -105,8 +105,17 @@ export default function Home() {
   gap: 1rem;
 }
 
+.form-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
 .form-group label {
-  margin-bottom: 0.75rem;
+  min-width: 150px;
+  margin-bottom: 0;
   font-weight: 500;
   color: #ffffff;
 }
