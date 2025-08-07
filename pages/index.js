@@ -24,10 +24,10 @@ export default function Home() {
     <>
       {/* —— Global Styles —— */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
         :root{--primary:#ff7e1b;--primary-dark:#e56700;--text-light:#ffffff;--text-dark:#111827;--bg-light:#ffffff;--bg-section:#f7f9fc}
         *,*:before,*:after{box-sizing:border-box;margin:0;padding:0}
-        body{font-family:'Inter',sans-serif;color:var(--text-dark);background:var(--bg-light)}
+        body{font-family:'Poppins',sans-serif;color:var(--text-dark);background:var(--bg-light)}
         a{text-decoration:none;color:inherit}
         @keyframes introFade{0%{opacity:1}70%{opacity:1}100%{opacity:0;visibility:hidden}}
         .intro{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;background:var(--bg-light);animation:introFade 2.2s ease forwards;z-index:9999}
@@ -124,12 +124,45 @@ export default function Home() {
       )}
 
       <section className="hero">
-        <h1 className="hero-title">Benvenuto nella beta di ItinerAI</h1>
-        <p className="hero-subtitle">Il tuo viaggio pianificato in 30 secondi.</p>
-        <a onClick={() => setShowForm(!showForm)} className="btn-primary" style={{cursor: 'pointer'}}>
-  Crea il tuo itinerario
-</a>
-      </section>
+  <h1 className="hero-title">Benvenuto nella beta di ItinerAI</h1>
+  <p className="hero-subtitle">Il tuo viaggio pianificato in 30 secondi.</p>
+  <a onClick={() => setShowForm(!showForm)} className="btn-primary" style={{cursor: 'pointer'}}>
+    Crea il tuo itinerario
+  </a>
+
+  {showForm && (
+    <div className="form-section">
+      <div className="form-container">
+        <h3 style={{ fontFamily: "'Poppins', sans-serif" }}>Inizia a pianificare il tuo viaggio</h3>
+        <form>
+          <div className="form-grid">
+            <div className="form-group">
+              <label>Partenza</label>
+              <input type="text" placeholder="Es. Roma" />
+            </div>
+            <div className="form-group">
+              <label>Destinazione</label>
+              <input type="text" placeholder="Es. Parigi" />
+            </div>
+            <div className="form-group">
+              <label>Durata (giorni)</label>
+              <input type="number" min="1" placeholder="Es. 5" />
+            </div>
+            <div className="form-group">
+              <label>Data partenza</label>
+              <input type="date" />
+            </div>
+            <div className="form-group">
+              <label>Numero viaggiatori</label>
+              <input type="number" min="1" defaultValue="1" />
+            </div>
+          </div>
+          <button type="submit" className="btn-primary" style={{marginTop: '1rem'}}>Genera itinerario</button>
+        </form>
+      </div>
+    </div>
+  )}
+</section>
 
       <section id="how" className="section">
         <h2 className="section-title">Come funziona</h2>
