@@ -128,7 +128,7 @@ const [generating, setGenerating] = useState(false);
 }
 
 .form-group label {
-  min-width: 120px;
+  min-width: 100px;
   margin-bottom: 0;
   font-weight: 500;
   color: #ffffff;
