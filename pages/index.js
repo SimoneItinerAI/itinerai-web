@@ -4,25 +4,11 @@ import logo from '../src/assets/logo.png';
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [introVisible, setIntroVisible] = useState(true);
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     const t = setTimeout(() => setIntroVisible(false), 2200);
-
-    // Fade‑in feature cards when they enter viewport
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting) e.target.classList.add('show');
-        });
-      },
-      { threshold: 0.2 }
-    );
-    document.querySelectorAll('.feature-card').forEach(el => observer.observe(el));
-
-    return () => {
-      clearTimeout(t);
-      observer.disconnect();
-    };
+    return () => clearTimeout(t);
   }, []);
 
   const heroBg =
@@ -39,12 +25,10 @@ export default function Home() {
       {/* —— Global Styles —— */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-        :root{--primary:#ff7e1b;--primary-dark:#e56700;--text-light:#fff;--text-dark:#111827;--bg-light:#fff;--bg-section:#f7f9fc}
+        :root{--primary:#ff7e1b;--primary-dark:#e56700;--text-light:#ffffff;--text-dark:#111827;--bg-light:#ffffff;--bg-section:#f7f9fc}
         *,*:before,*:after{box-sizing:border-box;margin:0;padding:0}
         body{font-family:'Inter',sans-serif;color:var(--text-dark);background:var(--bg-light)}
-        a{text-decoration:none;color:inherit;position:relative}
-        a::after{content:'';position:absolute;left:0;bottom:-4px;width:0;height:2px;background:var(--primary);transition:width .3s ease}
-        a:hover::after{width:100%}
+        a{text-decoration:none;color:inherit}
         @keyframes introFade{0%{opacity:1}70%{opacity:1}100%{opacity:0;visibility:hidden}}
         .intro{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;background:var(--bg-light);animation:introFade 2.2s ease forwards;z-index:9999}
         .intro-logo{width:80px;height:80px}
@@ -68,10 +52,41 @@ export default function Home() {
         .section{padding:4rem 1.5rem}
         .section-title{text-align:center;font-size:2rem;font-weight:700;margin-bottom:2.5rem}
         .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;max-width:1000px;margin:0 auto}
-        .feature-card{background:var(--bg-light);border:1px solid #e5e7eb;border-radius:.375rem;padding:2rem 1.25rem;text-align:center;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
-        .feature-card.show{opacity:1;transform:translateY(0)}
+        .feature-card{background:var(--bg-light);border:1px solid #e5e7eb;border-radius:.375rem;padding:2rem 1.25rem;text-align:center}
         .feature-number{font-size:2rem;font-weight:700;color:var(--primary);margin-bottom:.75rem}
         footer{background:#111827;color:#9ca3af;text-align:center;padding:2rem 1.5rem}
+        .form-section {
+  animation: fadeSlideDown 0.5s ease forwards;
+  background: #ffffff;
+  padding: 2rem 1.5rem;
+}
+@keyframes fadeSlideDown {
+  0% { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.form-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+.form-group input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
       `}</style>
 
       {introVisible && (
@@ -81,7 +96,6 @@ export default function Home() {
         </div>
       )}
 
-      {/* —— Navbar —— */}
       <header className="navbar">
         <div className="nav-container">
           <a href="/" style={{display:'flex',alignItems:'center',gap:'0.5rem',fontWeight:700,fontSize:'1.25rem',color:'var(--primary)'}}>
@@ -93,15 +107,14 @@ export default function Home() {
             <a href="#create">Crea itinerario</a>
             <a href="#contact">Contatti</a>
           </nav>
-          <button className="hamburger" aria-label="Apri menu" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? '×' : '☰'}</button>
+          <button className="hamburger" aria-label="Apri menu" onClick={() => setMenuOpen(true)}>☰</button>
         </div>
       </header>
 
-      {/* —— Drawer —— */}
       {menuOpen && (
         <>
           <div className="drawer-overlay" onClick={() => setMenuOpen(false)} />
-          <aside className="drawer open">
+          <aside className={`drawer ${menuOpen ? 'open' : ''}`}>
             <button onClick={() => setMenuOpen(false)} aria-label="Chiudi menu" style={{position:'absolute',top:'1rem',right:'1rem',background:'transparent',border:'none',fontSize:'1.5rem',cursor:'pointer'}}>×</button>
             <nav>
               <a href="#how" onClick={() => setMenuOpen(false)}>Come funziona</a>
@@ -112,17 +125,67 @@ export default function Home() {
         </>
       )}
 
-      {/* —— Hero —— */}
       <section className="hero">
         <h1 className="hero-title">Benvenuto nella beta di ItinerAI</h1>
         <p className="hero-subtitle">Il tuo viaggio pianificato in 30 secondi.</p>
-        <a href="#create" className="btn-primary">Crea il tuo itinerario</a>
+        <a onClick={() => setShowForm(!showForm)} className="btn-primary" style={{cursor: 'pointer'}}>
+  Crea il tuo itinerario
+</a>
       </section>
 
-      {/* —— How it works —— */}
       <section id="how" className="section">
         <h2 className="section-title">Come funziona</h2>
         <div className="features-grid">
           {features.map(({ num, title, desc }) => (
             <div key={num} className="feature-card">
-              <div className="feature-number">{num}
+              <div className="feature-number">{num}</div>
+              <h3 style={{fontSize:'1.25rem',fontWeight:600,marginBottom:'0.5rem'}}>{title}</h3>
+              <p style={{lineHeight:1.5}}>{desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+{showForm && (
+  <section className="form-section">
+    <div className="form-container">
+      <h3>Inizia a pianificare il tuo viaggio</h3>
+      <form>
+        <div className="form-grid">
+          <div className="form-group">
+            <label>Partenza</label>
+            <input type="text" placeholder="Es. Roma" />
+          </div>
+          <div className="form-group">
+            <label>Destinazione</label>
+            <input type="text" placeholder="Es. Parigi" />
+          </div>
+          <div className="form-group">
+            <label>Durata (giorni)</label>
+            <input type="number" min="1" placeholder="Es. 5" />
+          </div>
+          <div className="form-group">
+            <label>Data partenza</label>
+            <input type="date" />
+          </div>
+          <div className="form-group">
+            <label>Numero viaggiatori</label>
+            <input type="number" min="1" defaultValue="1" />
+          </div>
+        </div>
+        <button type="submit" className="btn-primary" style={{marginTop: '1rem'}}>Genera itinerario</button>
+      </form>
+    </div>
+  </section>
+)}
+
+      <section id="create" className="section" style={{background:'var(--bg-section)'}}>
+        <h2 className="section-title">Crea il tuo itinerario</h2>
+        <p style={{textAlign:'center',maxWidth:'600px',margin:'0 auto'}}>Il nostro motore AI è in arrivo: presto potrai generare itinerari personalizzati completi di mappa e suggerimenti locali.</p>
+      </section>
+
+      <footer id="contact">
+        <p>© {new Date().getFullYear()} ItinerAI — Tutti i diritti riservati.</p>
+      </footer>
+    </>
+  );
+}
