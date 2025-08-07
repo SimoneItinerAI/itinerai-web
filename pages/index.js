@@ -5,6 +5,15 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [introVisible, setIntroVisible] = useState(true);
   const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({
+  partenza: '',
+  destinazione: '',
+  durata: '',
+  data: '',
+  viaggiatori: ''
+});
+
+const [generating, setGenerating] = useState(false);
 
   useEffect(() => {
     const t = setTimeout(() => setIntroVisible(false), 2200);
@@ -48,7 +57,12 @@ export default function Home() {
         .hero-title{font-size:clamp(2rem,5vw,3rem);font-weight:700;margin-bottom:.5rem}
         .hero-subtitle{font-size:1.125rem;margin-bottom:1.5rem}
         .btn-primary{display:inline-block;padding:.75rem 1.75rem;border-radius:.375rem;font-weight:600;background:var(--primary);color:var(--text-light);transition:background .2s}
-        .btn-primary:hover{background:var(--primary-dark)}
+        .btn-primary:hover {
+  background: var(--primary-dark);
+  box-shadow: 0 0 12px rgba(255, 126, 27, 0.4);
+  transform: scale(1.03);
+  transition: all 0.2s ease-in-out;
+}
         .section{padding:4rem 1.5rem}
         .section-title{text-align:center;font-size:2rem;font-weight:700;margin-bottom:2.5rem}
         .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;max-width:1000px;margin:0 auto}
@@ -114,7 +128,7 @@ export default function Home() {
 }
 
 .form-group label {
-  min-width: 150px;
+  min-width: 120px;
   margin-bottom: 0;
   font-weight: 500;
   color: #ffffff;
@@ -137,7 +151,8 @@ export default function Home() {
 
 .form-group input:focus {
   border-color: var(--primary);
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 6px rgba(255, 126, 27, 0.3);
 }
       `}</style>
 
@@ -186,30 +201,68 @@ export default function Home() {
     <div className="form-section">
       <div className="form-container">
         <h3 style={{ fontFamily: "'Poppins', sans-serif" }}>Inizia a pianificare il tuo viaggio</h3>
-        <form>
+        <form onSubmit={(e) => {
+  e.preventDefault();
+  setGenerating(true);
+  setTimeout(() => {
+    setGenerating(false);
+    console.log("Dati inviati:", formData);
+    // Qui potrai aggiungere le API o mostrare l’itinerario
+  }, 2000);
+}}>
           <div className="form-grid">
             <div className="form-group">
               <label>Partenza</label>
-              <input type="text" placeholder="Es. Roma" />
+              <input
+  type="text"
+  placeholder="Es. Roma"
+  value={formData.partenza}
+  onChange={(e) => setFormData({ ...formData, partenza: e.target.value })}
+/>
             </div>
             <div className="form-group">
               <label>Destinazione</label>
-              <input type="text" placeholder="Es. Parigi" />
+              <input
+  type="text"
+  placeholder="Es. Parigi"
+  value={formData.destinazione}
+  onChange={(e) => setFormData({ ...formData, destinazione: e.target.value })}
+/>
             </div>
             <div className="form-group">
               <label>Durata (giorni)</label>
-              <input type="number" min="1" placeholder="Es. 5" />
+              <input
+  type="number"
+  min="1"
+  placeholder="Es. 5"
+  value={formData.durata}
+  onChange={(e) => setFormData({ ...formData, durata: e.target.value })}
+/>
             </div>
             <div className="form-group">
               <label>Data partenza</label>
-              <input type="date" />
+              <input
+  type="date"
+  value={formData.data}
+  onChange={(e) => setFormData({ ...formData, data: e.target.value })}
+/>
             </div>
             <div className="form-group">
               <label>Numero viaggiatori</label>
-              <input type="number" min="1" defaultValue="1" />
+              <input
+  type="number"
+  min="1"
+  value={formData.viaggiatori}
+  onChange={(e) => setFormData({ ...formData, viaggiatori: e.target.value })}
+/>
             </div>
           </div>
           <button type="submit" className="btn-primary" style={{marginTop: '1rem'}}>Genera itinerario</button>
+    {generating && (
+    <p style={{ color: "#fff", textAlign: "center", marginTop: "1rem" }}>
+      🎉 Generazione itinerario in corso...
+    </p>
+  )}
         </form>
       </div>
     </div>
