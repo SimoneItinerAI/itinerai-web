@@ -12,6 +12,8 @@ export default function Home() {
   data: '',
   viaggiatori: ''
 });
+  
+const [itinerario, setItinerario] = useState(null);
 
 const [generating, setGenerating] = useState(false);
 
@@ -206,8 +208,11 @@ const [generating, setGenerating] = useState(false);
   setGenerating(true);
   setTimeout(() => {
     setGenerating(false);
-    console.log("Dati inviati:", formData);
-    // Qui potrai aggiungere le API o mostrare l’itinerario
+    setItinerario({
+  giorno1: `Arrivo a ${formData.destinazione}, sistemazione in hotel, esplorazione del centro storico.`,
+  giorno2: `Visita a musei e attrazioni principali di ${formData.destinazione}.`,
+  giorno3: `Relax, escursione o attività locali. Rientro previsto.`,
+});
   }, 2000);
 }}>
           <div className="form-grid">
@@ -263,6 +268,23 @@ const [generating, setGenerating] = useState(false);
       🎉 Generazione itinerario in corso...
     </p>
   )}
+    {itinerario && (
+  <div style={{
+    marginTop: '2rem',
+    padding: '1.5rem',
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    borderRadius: '8px',
+    color: '#fff',
+    boxShadow: '0 0 10px rgba(0,0,0,0.2)'
+  }}>
+    <h4 style={{ marginBottom: '1rem' }}>🧭 Itinerario suggerito:</h4>
+    <ul style={{ lineHeight: '1.6' }}>
+      <li><strong>Giorno 1:</strong> {itinerario.giorno1}</li>
+      <li><strong>Giorno 2:</strong> {itinerario.giorno2}</li>
+      <li><strong>Giorno 3:</strong> {itinerario.giorno3}</li>
+    </ul>
+  </div>
+)}
         </form>
       </div>
     </div>
