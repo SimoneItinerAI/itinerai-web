@@ -209,9 +209,22 @@ const [generating, setGenerating] = useState(false);
   setTimeout(() => {
     setGenerating(false);
     setItinerario({
-  giorno1: `Arrivo a ${formData.destinazione}, sistemazione in hotel, esplorazione del centro storico.`,
-  giorno2: `Visita a musei e attrazioni principali di ${formData.destinazione}.`,
-  giorno3: `Relax, escursione o attività locali. Rientro previsto.`,
+  giorno1: [
+    "✈️ Volo economico con ItinerAir, partenza da " + formData.partenza + " e arrivo a " + formData.destinazione,
+    "🏨 Check-in presso l'Hotel Centrale 3★",
+    "🌆 Passeggiata nel centro storico e cena al Ristorante 'La Tradizione'"
+  ],
+  giorno2: [
+    "🖼️ Visita al Museo Nazionale di " + formData.destinazione,
+    "🍝 Pranzo veloce in una trattoria tipica",
+    "🎢 Escursione pomeridiana presso le attrazioni locali",
+    "💃 Serata in discoteca (se disponibile nella zona)"
+  ],
+  giorno3: [
+    "🧘 Mattinata di relax al parco cittadino o centro benessere",
+    "🛍️ Shopping o souvenir tipici",
+    "✈️ Rientro verso " + formData.partenza + " con volo ItinerAir"
+  ]
 });
   }, 2000);
 }}>
@@ -278,11 +291,16 @@ const [generating, setGenerating] = useState(false);
     boxShadow: '0 0 10px rgba(0,0,0,0.2)'
   }}>
     <h4 style={{ marginBottom: '1rem' }}>🧭 Itinerario suggerito:</h4>
-    <ul style={{ lineHeight: '1.6' }}>
-      <li><strong>Giorno 1:</strong> {itinerario.giorno1}</li>
-      <li><strong>Giorno 2:</strong> {itinerario.giorno2}</li>
-      <li><strong>Giorno 3:</strong> {itinerario.giorno3}</li>
-    </ul>
+    <div style={{ lineHeight: '1.6' }}>
+  <h5>🗓️ Giorno 1</h5>
+  <ul>{itinerario.giorno1.map((item, i) => <li key={i}>{item}</li>)}</ul>
+
+  <h5 style={{ marginTop: '1rem' }}>🗓️ Giorno 2</h5>
+  <ul>{itinerario.giorno2.map((item, i) => <li key={i}>{item}</li>)}</ul>
+
+  <h5 style={{ marginTop: '1rem' }}>🗓️ Giorno 3</h5>
+  <ul>{itinerario.giorno3.map((item, i) => <li key={i}>{item}</li>)}</ul>
+</div>
   </div>
 )}
         </form>
