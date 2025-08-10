@@ -206,30 +206,27 @@ const [generating, setGenerating] = useState(false);
         <form onSubmit={(e) => {
   e.preventDefault();
   setGenerating(true);
-  const Amadeus = require('amadeus'); // oppure `import Amadeus from 'amadeus';` in alto nel file
-
-  const amadeus = new Amadeus({
-    clientId: '8V5GabGB5mjB7IuDzv0I1z9HOtjLbmWr',
-    clientSecret: 'aF2RlpW620oKTgnr'
-  });
-
-  amadeus.shopping.flightOffersSearch.get({
-    originLocationCode: formData.partenza.toUpperCase(),
-    destinationLocationCode: formData.destinazione.toUpperCase(),
-    departureDate: formData.data,
-    adults: formData.viaggiatori,
-    max: 3
-  })
-  .then(response => {
-    console.log("Voli trovati:", response.data);
+  setTimeout(() => {
     setGenerating(false);
-    // Qui in futuro possiamo fare setItinerario con i voli reali
-  })
-  .catch(err => {
-    console.error("Errore nella ricerca voli:", err);
-    setGenerating(false);
-  });
-
+    setItinerario({
+  giorno1: [
+    "✈️ Volo economico con ItinerAir, partenza da " + formData.partenza + " e arrivo a " + formData.destinazione,
+    "🏨 Check-in presso l'Hotel Centrale 3★",
+    "🌆 Passeggiata nel centro storico e cena al Ristorante 'La Tradizione'"
+  ],
+  giorno2: [
+    "🖼️ Visita al Museo Nazionale di " + formData.destinazione,
+    "🍝 Pranzo veloce in una trattoria tipica",
+    "🎢 Escursione pomeridiana presso le attrazioni locali",
+    "💃 Serata in discoteca (se disponibile nella zona)"
+  ],
+  giorno3: [
+    "🧘 Mattinata di relax al parco cittadino o centro benessere",
+    "🛍️ Shopping o souvenir tipici",
+    "✈️ Rientro verso " + formData.partenza + " con volo ItinerAir"
+  ]
+});
+  }, 2000);
 }}>
           <div className="form-grid">
             <div className="form-group">
