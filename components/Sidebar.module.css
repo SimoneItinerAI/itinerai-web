@@ -1,0 +1,61 @@
+.hamburger {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1001;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  z-index: 1000;
+}
+.backdrop.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  width: 260px;
+  height: 100%;
+  background: #fff;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+  padding: 2rem 1rem;
+  transition: left 0.3s;
+  z-index: 1001;
+}
+.drawer.show {
+  left: 0;
+}
+
+.drawer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.drawer li + li {
+  margin-top: 1rem;
+}
+.drawer summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.drawer a {
+  text-decoration: none;
+  color: #333;
+}
+.drawer details ul {
+  margin-top: 0.5rem;
+  padding-left: 1rem;
+}
